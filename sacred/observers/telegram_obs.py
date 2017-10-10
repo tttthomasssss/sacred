@@ -87,7 +87,7 @@ class TelegramObserver(RunObserver):
 
     def started_event(self, ex_info, command, host_info, start_time, config,
                       meta_info, _id):
-        import telegram.ParseMode
+        from telegram import ParseMode
         self.run = {
             '_id': _id,
             'config': config,
@@ -102,7 +102,7 @@ class TelegramObserver(RunObserver):
             self.bot.send_message(chat_id=self.chat_id,
                                   text=self.get_started_text(),
                                   disable_notification=True,
-                                  parse_mode=telegram.ParseMode.MARKDOWN)
+                                  parse_mode=ParseMode.MARKDOWN)
         except Exception as e:
             log = logging.getLogger('telegram-observer')
             log.warning('failed to send start_event message via telegram.',
